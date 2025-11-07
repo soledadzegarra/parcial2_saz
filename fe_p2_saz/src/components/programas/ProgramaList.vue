@@ -46,6 +46,7 @@ defineExpose({ obtenerLista })
           <th>Nro.</th>
           <th>Nombre</th>
           <th>Nivel Académico</th>
+          <th>Modalidad</th>
           <th>Descripción</th>
           <th>Versión</th>
           <th>Duración (meses)</th>
@@ -60,6 +61,7 @@ defineExpose({ obtenerLista })
           <td>{{ index + 1 }}</td>
           <td>{{ programa.nombre }}</td>
           <td>{{ programa.nivelAcademico?.nombre || 'N/A' }}</td>
+          <td>{{ programa.modalidadClases || 'N/A' }}</td>
           <td>{{ programa.descripcion }}</td>
           <td>{{ programa.version }}</td>
           <td>{{ programa.duracionMeses }}</td>

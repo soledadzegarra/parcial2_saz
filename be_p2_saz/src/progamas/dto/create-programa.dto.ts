@@ -30,6 +30,12 @@ export class CreateProgramaDto {
   readonly descripcion: string;
 
   @ApiProperty()
+  @IsNotEmpty({ message: 'El campo modalidadClases no debe ser vacío' })
+  @IsString({ message: 'El campo modalidadClases debe ser de tipo cadena' })
+  @MaxLength(255, { message: 'El campo modalidadClases no debe ser mayor a 255 caracteres' })
+  readonly modalidadClases: string;
+
+  @ApiProperty()
   @IsNotEmpty({ message: 'El campo version no debe ser vacío' })
   @IsNumber({}, { message: 'El campo version debe ser de tipo numérico' })
   readonly version: number;

@@ -35,6 +35,12 @@ const estadosDisponibles = [
   { label: 'Finalizado', value: 'Finalizado' }
 ]
 
+const modalidadesDisponibles = [
+  { label: 'Presencial', value: 'Presencial' },
+  { label: 'Virtual', value: 'Virtual' },
+  { label: 'Mixto', value: 'Mixto' }
+]
+
 const programa = ref<Programa>({ ...props.programa })
 const nivelesAcademicos = ref<any[]>([])
 const fechaInicioDate = ref<Date | null>(null)
@@ -62,6 +68,8 @@ watch(
       // Resetear el formulario cuando se abre en modo creación
       programa.value = {} as Programa
       fechaInicioDate.value = null
+      // Valor por defecto para modalidad de clases
+      programa.value.modalidadClases = 'Presencial'
     }
   }
 )
@@ -92,6 +100,7 @@ async function handleSave() {
       idNivelAcademico: programa.value.idNivelAcademico,
       nombre: programa.value.nombre,
       descripcion: programa.value.descripcion,
+      modalidadClases: programa.value.modalidadClases,
       version: programa.value.version,
       duracionMeses: programa.value.duracionMeses,
       costo: programa.value.costo,
@@ -136,15 +145,26 @@ async function handleSave() {
         <InputText id="nombre" v-model="programa.nombre" class="flex-auto" autocomplete="off" />
       </div>
       <div class="flex items-center gap-4 mb-4">
-        <label for="descripcion" class="font-semibold w-40">Descripción</label>
-        <Textarea
-          id="descripcion"
-          v-model="programa.descripcion"
-          rows="3"
-          class="flex-auto"
-          autocomplete="off"
-        />
+            <label for="descripcion" class="font-semibold w-40">Descripción</label>
+            <Textarea
+              id="descripcion"
+              v-model="programa.descripcion"
+              rows="3"
+              class="flex-auto"
+              autocomplete="off"
+            />
       </div>
+          <div class="flex items-center gap-4 mb-4">
+            <label for="modalidadClases" class="font-semibold w-40">Modalidad de Clases</label>
+            <Select
+              id="modalidadClases"
+              v-model="programa.modalidadClases"
+              :options="modalidadesDisponibles"
+              optionLabel="label"
+              optionValue="value"
+              class="flex-auto"
+            />
+          </div>
       <div class="flex items-center gap-4 mb-4">
         <label for="version" class="font-semibold w-40">Versión</label>
         <InputNumber id="version" v-model="programa.version" class="flex-auto" />
